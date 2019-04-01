@@ -15,9 +15,9 @@ Have to decide between using tcpdump or tshark as the packet capture app.
 
 SETUP
 
+pip3 install pyshark
 sudo apt install tshark
-sudo dpkg-reconfigure wireshark-common
-# say yes
+sudo dpkg-reconfigure wireshark-common 
 sudo chmod +x /usr/bin/dumpcap
 sudo setcap cap_net_raw,cap_net_admin+eip /usr/sbin/tcpdump
 
