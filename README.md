@@ -10,3 +10,14 @@ This may limit some functionality of tshark, but this is not that much of a prob
 A goal would be to somehow read in all possible filters or flags from a text file so that wire.py could correct user inputs that are wrong.
 
 A particular function could guess at what the user is trying to do by trying to match user inputs with that list of possible filters/arguments by searching for words with the most letters alike.
+
+Have to decide between using tcpdump or tshark as the packet capture app.
+
+SETUP
+
+sudo apt install tshark
+sudo dpkg-reconfigure wireshark-common
+# say yes
+sudo chmod +x /usr/bin/dumpcap
+sudo setcap cap_net_raw,cap_net_admin+eip /usr/sbin/tcpdump
+
