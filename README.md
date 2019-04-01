@@ -13,11 +13,11 @@ A particular function could guess at what the user is trying to do by trying to 
 
 Have to decide between using tcpdump or tshark as the packet capture app.
 
-SETUP
+## SETUP
 
-pip3 install pyshark
-sudo apt install tshark
-sudo dpkg-reconfigure wireshark-common 
-sudo chmod +x /usr/bin/dumpcap
-sudo setcap cap_net_raw,cap_net_admin+eip /usr/sbin/tcpdump
+- pip3 install pyshark
+- sudo apt install tshark
+- sudo dpkg-reconfigure wireshark-common 
+- sudo chmod +x /usr/bin/dumpcap
+- sudo setcap cap_net_raw,cap_net_admin+eip /usr/sbin/tcpdump
 
