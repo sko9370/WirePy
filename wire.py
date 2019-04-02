@@ -7,6 +7,100 @@ import os
 from time import sleep
 from subprocess import Popen, PIPE
 import pyshark
+import readline
+import logging
+
+LOG_FILENAME = './completer.log'
+logging.basicConfig(filename=LOG_FILENAME,
+            level=logging.DEBUG,
+            )
+
+class BufferAwareCompleter(object):
+
+    def __init__(self, options):
+        self.options = options
+        self.current_candidates = []
+        return
+
+    def complete(self, text, state):
+        response = None
+        if state == 0:
+            # first time for this text, so build a match list
+
+            origline = readline.get_line_buffer()
+            begin = readline.get_begidx()
+            end = readline.get_endidx()
+            being_completed = origline[begin:end]
+            words = origline.split()
+
+            logging.debug('origline=%s', repr(origline))
+            logging.debug('begin=%s', begin)
+            logging.debug('end=%s', end)
+            logging.debug('being_completed=%s', being_completed)
+            logging.debug('words=%s', words)
+
+            if not words:
+                self.current_candidates = sorted(self.options.keys())
+            else:
+                try:
+                    if begin == 0:
+                        # first words
+                        candidates = self.options.keys()
+                    else:
+                        # later word
+                        first = words[0]
+                        candidates = self.options[first]
+
+                    if being_completed:
+                        # match options with portion of input
+                        # being completed
+                        self.current_candidates = [ w for w in candidates
+                                                if w.startswith(being_completed) ]
+
+                    else:
+                        # matching empty string so use all candidates
+                        self.current_candidates = candidates
+
+                    logging.debug('candidates=%s', self.current_candidates)
+
+                except ((KeyError, IndexError), err):
+                    logging.error('completion error: %s', err)
+                    self.current_candidates = []
+
+        try:
+            response = self.current_candidates[state]
+        except IndexError:
+            response = None
+        logging.debug('complete(%s, %s) => %s', repr(text), state, response)
+        return response
+
+def input_loop():
+    line = ''
+    oldLine = ''
+    while line != 'stop':
+        oldLine = line
+        line = input('type in your filter and press tab to autocomplete: ')
+        print(line)
+        if line == '':
+            confirm = input('is -%s- okay, y or n? ' % oldLine)
+            if confirm == 'y':
+                return oldLine
+            else:
+                pass
+    return line
+
+readline.set_completer(BufferAwareCompleter(
+    {'ip.addr':[],
+    'ip.src':[],
+    'ip.dst':[],
+    'tcp.ack':[],
+    'tcp.port':[],
+    'stop':[],
+     }).complete)
+
+readline.parse_and_bind('tab: complete')
+
+# input_loop()
 
 ### Title Bar ###
 
@@ -59,7 +153,8 @@ while choice != 'q':
         # possibly import list of all display-filter keywords to list from file
         # check filter input to this list of words to help correct user input
         validFilters = []
-        filters = input("filters here (like 'http and ip.addr==10.10.4.251') ")
+        # filters = input("filters here (like 'http and ip.addr==10.10.4.251') ")
+        filters = input_loop()
 
         # allow for a couple seconds of delay
         print("\nplease wait a few seconds\n")
