@@ -55,19 +55,32 @@ while choice != 'q':
 
     elif choice == '2':
         print("\nyou chose 2!\n")
+
+        # possibly import list of all display-filter keywords to list from file
+        # check filter input to this list of words to help correct user input
         validFilters = []
         filters = input("filters here (like 'http and ip.addr==10.10.4.251') ")
-        pcap = pyshark.FileCapture(pcapName, display_filter=filters, only_summaries=True)
+
+        # allow for a couple seconds of delay
+        print("\nplease wait a few seconds\n")
+        pcap = pyshark.FileCapture(pcapName,
+                display_filter=filters,
+                only_summaries=True)
         for packet in pcap:
             print(packet)
 
     elif choice == '3':
         print("\nyou chose 3!\n")
-        packetNumber = input("packet number: ")
+        packetNumber = int(input("packet number: "))
+
+        # allow for a couple seconds of delay
+        print("\nplease wait a few seconds\n")
         pcap = pyshark.FileCapture(pcapName)
-        print(pcap[int(packetNumber)])
+        print(pcap[packetNumber])
 
     elif choice == 'q':
         print("\nyou chose to quit\n")
+        print("\nleaving\n")
+
     else:
         print("\nnot valid choice, try again\n")
