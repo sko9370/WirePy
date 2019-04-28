@@ -100,8 +100,6 @@ readline.set_completer(BufferAwareCompleter(
 
 readline.parse_and_bind('tab: complete')
 
-# input_loop()
-
 ### Title Bar ###
 
 def display_title():
@@ -138,16 +136,20 @@ while choice != 'q':
 
     display_title()
 
-    if choice == '1':
+    if choice == '1': # see everything
         # https://www.saltycrane.com/blog/2008/09/how-get-stdout-and-stderr-using-python
         # -subprocess-module/
 
         print("\nyou chose 1!\n")
         pcap = pyshark.FileCapture(pcapName, only_summaries=True)
+        # for packet in pcap:
+            # print(packet)
+        output = open("pcaptemp", "w")
         for packet in pcap:
-            print(packet)
+            output.write(str(packet) + "\n")
+        os.system('less pcaptemp')
 
-    elif choice == '2':
+    elif choice == '2': # choose a filter
         print("\nyou chose 2!\n")
 
         # possibly import list of all display-filter keywords to list from file
@@ -164,7 +166,7 @@ while choice != 'q':
         for packet in pcap:
             print(packet)
 
-    elif choice == '3':
+    elif choice == '3': # examine a packet in detail
         print("\nyou chose 3!\n")
         packetNumber = int(input("packet number: "))
 
@@ -173,7 +175,7 @@ while choice != 'q':
         pcap = pyshark.FileCapture(pcapName)
         print(pcap[packetNumber])
 
-    elif choice == 'q':
+    elif choice == 'q': # quit
         print("\nyou chose to quit\n")
         print("\nleaving\n")
 

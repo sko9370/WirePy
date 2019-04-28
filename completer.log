@@ -590,3 +590,8 @@ DEBUG:root:complete('', 3) => stop
 DEBUG:root:complete('', 4) => tcp.ack
 DEBUG:root:complete('', 5) => tcp.port
 DEBUG:root:complete('', 6) => None
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
