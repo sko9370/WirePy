@@ -595,3 +595,103 @@ DEBUG:asyncio:Using selector: EpollSelector
 DEBUG:asyncio:Using selector: EpollSelector
 DEBUG:asyncio:Using selector: EpollSelector
 DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:root:origline='http'
+DEBUG:root:begin=0
+DEBUG:root:end=4
+DEBUG:root:being_completed=http
+DEBUG:root:words=['http']
+DEBUG:root:candidates=[]
+DEBUG:root:complete('http', 0) => None
+DEBUG:root:origline='http'
+DEBUG:root:begin=0
+DEBUG:root:end=4
+DEBUG:root:being_completed=http
+DEBUG:root:words=['http']
+DEBUG:root:candidates=[]
+DEBUG:root:complete('http', 0) => None
+DEBUG:root:origline='http'
+DEBUG:root:begin=0
+DEBUG:root:end=4
+DEBUG:root:being_completed=http
+DEBUG:root:words=['http']
+DEBUG:root:candidates=[]
+DEBUG:root:complete('http', 0) => None
+DEBUG:root:origline='ip'
+DEBUG:root:begin=0
+DEBUG:root:end=2
+DEBUG:root:being_completed=ip
+DEBUG:root:words=['ip']
+DEBUG:root:candidates=['ip.addr', 'ip.src', 'ip.dst']
+DEBUG:root:complete('ip', 0) => ip.addr
+DEBUG:root:complete('ip', 1) => ip.src
+DEBUG:root:complete('ip', 2) => ip.dst
+DEBUG:root:complete('ip', 3) => None
+DEBUG:root:origline='ip.'
+DEBUG:root:begin=0
+DEBUG:root:end=3
+DEBUG:root:being_completed=ip.
+DEBUG:root:words=['ip.']
+DEBUG:root:candidates=['ip.addr', 'ip.src', 'ip.dst']
+DEBUG:root:complete('ip.', 0) => ip.addr
+DEBUG:root:complete('ip.', 1) => ip.src
+DEBUG:root:complete('ip.', 2) => ip.dst
+DEBUG:root:complete('ip.', 3) => None
+DEBUG:root:origline='ip.'
+DEBUG:root:begin=0
+DEBUG:root:end=3
+DEBUG:root:being_completed=ip.
+DEBUG:root:words=['ip.']
+DEBUG:root:candidates=['ip.addr', 'ip.src', 'ip.dst']
+DEBUG:root:complete('ip.', 0) => ip.addr
+DEBUG:root:complete('ip.', 1) => ip.src
+DEBUG:root:complete('ip.', 2) => ip.dst
+DEBUG:root:complete('ip.', 3) => None
+DEBUG:root:origline='ip.addr=='
+DEBUG:root:begin=9
+DEBUG:root:end=9
+DEBUG:root:being_completed=
+DEBUG:root:words=['ip.addr==']
+DEBUG:root:origline='ip.addr=='
+DEBUG:root:begin=9
+DEBUG:root:end=9
+DEBUG:root:being_completed=
+DEBUG:root:words=['ip.addr==']
+DEBUG:root:origline='ip.addr=='
+DEBUG:root:begin=9
+DEBUG:root:end=9
+DEBUG:root:being_completed=
+DEBUG:root:words=['ip.addr==']
+DEBUG:root:origline='ip.addr=='
+DEBUG:root:begin=9
+DEBUG:root:end=9
+DEBUG:root:being_completed=
+DEBUG:root:words=['ip.addr==']
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector

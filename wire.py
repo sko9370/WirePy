@@ -75,14 +75,14 @@ class BufferAwareCompleter(object):
         return response
 
 def input_loop():
+    readline.parse_and_bind('tab: complete')
     line = ''
     oldLine = ''
     while line != 'stop':
         oldLine = line
         line = input('type in your filter and press tab to autocomplete: ')
-        print(line)
-        if line == '':
-            confirm = input('is -%s- okay, y or n? ' % oldLine)
+        if line != '':
+            confirm = input("is \"%s\" okay, y or n? " % line)
             if confirm == 'y':
                 return oldLine
             else:
@@ -97,8 +97,6 @@ readline.set_completer(BufferAwareCompleter(
     'tcp.port':[],
     'stop':[],
      }).complete)
-
-readline.parse_and_bind('tab: complete')
 
 ### Title Bar ###
 
@@ -148,23 +146,59 @@ while choice != 'q':
         for packet in pcap:
             output.write(str(packet) + "\n")
         os.system('less pcaptemp')
+        output.close()
 
     elif choice == '2': # choose a filter
         print("\nyou chose 2!\n")
 
-        # possibly import list of all display-filter keywords to list from file
-        # check filter input to this list of words to help correct user input
-        validFilters = []
-        # filters = input("filters here (like 'http and ip.addr==10.10.4.251') ")
-        filters = input_loop()
+        print("\ndo you want to type in a wshark filter or a text filter?\n")
 
-        # allow for a couple seconds of delay
-        print("\nplease wait a few seconds\n")
-        pcap = pyshark.FileCapture(pcapName,
-                display_filter=filters,
-                only_summaries=True)
-        for packet in pcap:
-            print(packet)
+        answer = ""
+        while answer != "w" and answer != "t":
+            answer = str(input("[w]shark or [t]ext: "))
+            if answer != "w" and answer != "t":
+                print("that's not one of the choices, try again\n")
+
+        if answer == "w":
+            # possibly import list of all display-filter keywords to list from file
+            # check filter input to this list of words to help correct user input
+            validFilters = []
+
+            # filters = input("filters here (like 'http and ip.addr==10.10.4.251') ")
+            filters = input_loop()
+
+            # allow for a couple seconds of delay
+            print("\nplease wait a few seconds\n")
+            pcap = pyshark.FileCapture(pcapName,
+                    display_filter=filters,
+                    only_summaries=True)
+            output = open("pcaptemp", "w")
+            for packet in pcap:
+                output.write(str(packet) + "\n")
+            os.system('less pcaptemp')
+            output.close()
+
+        elif answer == "t":
+            full = ""
+            while full != "t" and full != "s":
+                full = str(input("scan through full [t]ext (this takes a while) or [s]ummary? "))
+                if full != "t" and full != "s":
+                    print("that's not one of the choices, try again")
+            summary = True
+            if full == "t":
+                summary = False
+
+            textFilter = str(input("enter your text filter here (i.e.: TCP 73): "))
+            print("\nplease wait a few seconds\n")
+            pcap = pyshark.FileCapture(pcapName,
+                    only_summaries=summary)
+            output = open("pcaptemp", "w")
+            for packet in pcap:
+                if textFilter in str(packet):
+                    output.write(str(packet) + "\n")
+            # os.system("cat pcaptemp | grep \"%s\" | less" % textFilter)
+            os.system("cat pcaptemp | less")
+            output.close()
 
     elif choice == '3': # examine a packet in detail
         print("\nyou chose 3!\n")
